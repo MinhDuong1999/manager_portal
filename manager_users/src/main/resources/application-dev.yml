@@ -1,0 +1,85 @@
+server:
+  port: ${SERVER_PORT:8085}
+  compression:
+    enabled: true
+    mime-types: application/json, application/xml, text/xml, text/html, text/plain
+    min-response-size: 1024
+    excluded-user-agents: MSIE 6.0,UCBrowser
+
+spring:
+  application:
+    name: manager-users
+  main:
+    allow-bean-definition-overriding: true
+  task:
+    scheduling:
+      pool:
+        size: 5
+  web:
+    locale: en
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: false
+        default_batch_fetch_size: 1000
+        generate_statistics: true
+        jdbc:
+          batch_size: 100
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://18.179.35.255:5432/postgres}
+    username: ${SECRET_USERNAME:postgres}
+    password: ${SECRET_PASSWORD:123456}
+  servlet:
+    multipart:
+      max-file-size: ${ATTACHMENT_SIZE_LIMIT:5242880}
+      max-request-size: ${ATTACHMENT_SIZE_LIMIT_PER_REQUEST:52428800}
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method
+jwt:
+  secret: ${SECRET_JWT_USER_KEY:no_key}
+  type: JWT
+  header: "Authorization"
+  prefix: "Bearer "
+  expire-time-access-token: ${ACCESS_TOKEN_TIME:1800000} #30minutes
+  expire-time-refresh-token: ${REFRESH_TOKEN_TIME:86400000} #1day
+  expire-time-remember-me: ${REMEMBER_ME_TIME:1209600000} #2wee
+
+logging:
+  level:
+    root: warn
+    base: warn
+    com:
+      example:
+        manager_users:
+          common:
+            filter:
+              CustomCommonsRequestLoggingFilter: WARN
+  file:
+    path: logs
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]){yellow} %clr(:){red} %clr(%m){faint}%n"
+
+security:
+  excludePattern:
+    - '/v3/api-docs/**'
+    - '/swagger-ui/**'
+    - '/swagger-ui.html'
+    - '/api/health**'
+    - '/api/ping'
+    - '/actuator/**'
+    - '/index.html'
+    - '/api/manager-users/auth/v1/login'
+    - '/api/manager-users/auth/v1/refresh-token'
+    - '/api/manager-users/auth/v1/logout'
