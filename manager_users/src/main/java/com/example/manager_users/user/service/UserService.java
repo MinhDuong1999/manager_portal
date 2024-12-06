@@ -11,5 +11,7 @@ public interface UserService {
     List<UserResponse> getUsers();
 
     CommonResponse<Boolean> createUser(CreateUser createUser);
+
+    CommonResponse<Boolean> deleteUsers(String id);
 }
 

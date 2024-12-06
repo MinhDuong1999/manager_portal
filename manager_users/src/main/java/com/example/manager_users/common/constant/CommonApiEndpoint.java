@@ -10,4 +10,6 @@ public class CommonApiEndpoint {
     public static final String PRODUCT = "/manager-users";
     public static final String AUTH_LOGIN = "/login";
     public static final String USERS = "/users";
+    public static final String ID_PATH_VARIABLE = "{id}";
+    public static final String SLASH= "/";
 }

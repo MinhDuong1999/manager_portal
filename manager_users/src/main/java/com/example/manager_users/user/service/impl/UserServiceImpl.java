@@ -62,4 +62,13 @@ public class UserServiceImpl implements UserService {
                         .description(messageHelper.getMessage(MessageResource.SAVE_SUCCESSFULLY.getCode(), Locale.ENGLISH))
                         .build());
     }
+
+    @Override
+    public CommonResponse<Boolean> deleteUsers(String id) {
+        userRepository.deleteById(id);
+        return CommonResponse.createSuccessData(true,
+                MessageResponse.builder()
+                        .description(messageHelper.getMessage(MessageResource.SAVE_SUCCESSFULLY.getCode(), Locale.ENGLISH))
+                        .build());
+    }
 }
