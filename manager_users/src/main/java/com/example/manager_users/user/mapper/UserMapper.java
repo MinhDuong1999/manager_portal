@@ -1,6 +1,8 @@
 package com.example.manager_users.user.mapper;
 
 import com.example.manager_users.common.entity.UserEntity;
+import com.example.manager_users.user.dto.request.CreateUser;
+import com.example.manager_users.user.dto.request.ProfileRequest;
 import com.example.manager_users.user.dto.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,4 +13,6 @@ public interface UserMapper {
 
     @Mapping(target = "accountId" , source = "id")
     UserResponse toUserResponse(UserEntity user);
+
+    ProfileRequest toProfileRequest(CreateUser user);
 }

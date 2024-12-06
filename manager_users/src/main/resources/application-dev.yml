@@ -32,7 +32,7 @@ spring:
       ddl-auto: none
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${DATABASE_URL:jdbc:postgresql://18.179.35.255:5432/postgres}
+    url: ${DATABASE_URL:jdbc:postgresql://57.180.250.211:5432/postgres}
     username: ${SECRET_USERNAME:postgres}
     password: ${SECRET_PASSWORD:123456}
   servlet:
@@ -83,3 +83,7 @@ security:
     - '/api/manager-users/auth/v1/login'
     - '/api/manager-users/auth/v1/refresh-token'
     - '/api/manager-users/auth/v1/logout'
+
+app:
+  services:
+    profiles: http://localhost:8086/api/resume/profiles

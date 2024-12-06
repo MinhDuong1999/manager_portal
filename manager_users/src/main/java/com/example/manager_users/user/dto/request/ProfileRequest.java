@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder
-public class CreateUser extends ProfileRequest{
-    private String username;
-    private String password;
+public class ProfileRequest {
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private String gender;
+    private String userId;
 }
